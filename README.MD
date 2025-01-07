@@ -66,7 +66,12 @@ Mac/Linux 安装Deno:
 - 启用摄像头
 - 分享屏幕
 <br>
-![image](/docs/images/2.png)
+
+<details>
+   <summary>如图</summary>
+   ![image](/docs/images/2.png)
+</details>
+
 
 ### API 代理
 API已经被代理为OpenAI格式，可以直接使用OpenAI格式的API。

@@ -108,14 +108,14 @@ curl --location 'https://your.domain.com/v1/chat/completions' \
 
 Website UI: 
 ```
-Author: ChrisKyle<br>
-Project: https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo<br>
+Author: ChrisKyle
+Project: https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo
 MIT License : https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo/blob/main/LICENSE
 ```
 
 Gemini to OpenAI format conversion: 
 ```
-Author: PublicAffairs<br>
-Project: https://github.com/PublicAffairs/openai-gemini<br>
+Author: PublicAffairs
+Project: https://github.com/PublicAffairs/openai-gemini
 MIT License : https://github.com/PublicAffairs/openai-gemini/blob/main/LICENSE
 ``` 
