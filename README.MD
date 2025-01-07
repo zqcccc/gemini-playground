@@ -77,7 +77,13 @@ Mac/Linux 安装Deno:
 API已经被代理为OpenAI格式，可以直接使用OpenAI格式的API。
 注意替换域名与Gemini API Key。
 
-### Curl:
+#### 可用模型列表：
+```
+curl --location 'http://your.domain.com/v1/models' \
+--header 'Authorization: Bearer YOUR-GEMINI-API-KEY'
+```
+
+#### 对话:
 ```
 curl --location 'https://your.domain.com/v1/chat/completions' \
 --header 'Authorization: Bearer YOUR-GEMINI-API-KEY' \

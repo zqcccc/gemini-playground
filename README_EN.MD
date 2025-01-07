@@ -72,6 +72,14 @@ The API has been proxied to OpenAI format and can be used directly with OpenAI f
 Remember to replace the domain and Gemini API Key.
 
 ### Curl:
+
+Available models:
+```
+curl --location 'http://your.domain.com/v1/models' \
+--header 'Authorization: Bearer YOUR-GEMINI-API-KEY'
+```
+
+Chat:
 ```
 curl --location 'https://your.domain.com/v1/chat/completions' \
 --header 'Authorization: Bearer YOUR-GEMINI-API-KEY' \
