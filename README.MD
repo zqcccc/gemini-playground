@@ -1,4 +1,4 @@
-# Gemini 2.0 Flash 游乐场
+# Gemini 2.0 游乐场
 
 # [English Version](README_EN.MD)
 
