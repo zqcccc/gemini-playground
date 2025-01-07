@@ -1,4 +1,4 @@
-# Gemini 2.0 Flash Playground
+# Gemini 2.0 Playground
 
 [中文版](README.MD)
 
@@ -6,7 +6,7 @@
 Available on Bilibili, YouTube, Douyin, and WeChat Official Account under the same name. Please credit the author when reposting.
 
 ## Project Overview
-
+#### Demo: [https://play.210718.xyz](https://play.210718.xyz)
 Deploy a Gemini multimodal chat website in 10 seconds with just a Gemini API Key.
 Accessible from any region/network environment, ready to use immediately.
 Free serverless deployment using Deno/Cloudflare Worker.
