@@ -9,13 +9,14 @@ B站，YouTube，抖音，公众号 全网同名。转载请注明作者。
 ## 项目简介
 #### Demo: [https://play.210718.xyz](https://play.210718.xyz)
 只需准备一个Gemini API Key，10秒即可部署一个Gemini多模态对话的网站。
-不限地区/网络环境，打开即用。
+不限地区/网络环境，打开即用，<b>适配了手机端</b>。
 使用Deno/Cloudflare Worker无服务器免费部署。
 对Gemini Chat API 进行了格式转换，中转为更通用的OpenAI格式，国内直连可用。
 可对接AI编程，接入ChatBox等AI客户端。
 
 ## Deno部署（推荐）
 
+0. 准备一个Gemini API Key [https://aistudio.google.com](https://aistudio.google.com)（免费）
 1. [fork](https://github.com/tech-shrimp/gemini-playground/fork)本项目
 2. 登录/注册 https://dash.deno.com/
 3. 创建项目 https://dash.deno.com/new_project
@@ -32,6 +33,8 @@ B站，YouTube，抖音，公众号 全网同名。转载请注明作者。
 ## Cloudflare Worker 部署
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tech-shrimp/gemini-playground)
+
+0. 准备一个Gemini API Key [https://aistudio.google.com](https://aistudio.google.com)（免费）
 1. 点击部署按钮
 2. 登录Cloudflare账号
 3. 填入Account ID，与API Token
@@ -70,6 +73,7 @@ Mac/Linux 安装Deno:
 
 <details>
    <summary>如图</summary>
+
    ![image](/docs/images/2.png)
 </details>
 
