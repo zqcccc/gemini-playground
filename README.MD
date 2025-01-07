@@ -111,14 +111,14 @@ curl --location 'https://your.domain.com/v1/chat/completions' \
 
 网站UI： 
 ```
-Author: ChrisKyle<br>
-Project: https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo<br>
+Author: ChrisKyle
+Project: https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo
 MIT License : https://github.com/ViaAnthroposBenevolentia/gemini-2-live-api-demo/blob/main/LICENSE
 ```
 
 Gemini转成OpenAI格式： 
 ```
-Author: PublicAffairs<br>
-Project: https://github.com/PublicAffairs/openai-gemini<br>
+Author: PublicAffairs
+Project: https://github.com/PublicAffairs/openai-gemini
 MIT License : https://github.com/PublicAffairs/openai-gemini/blob/main/LICENSE
 ```
