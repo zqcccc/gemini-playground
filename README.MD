@@ -80,6 +80,7 @@ Mac/Linux 安装Deno:
 
 ### API 代理
 API已经被代理为OpenAI格式，可以直接使用OpenAI格式的API。
+不限网络环境，可免梯子使用。
 注意替换域名与Gemini API Key。
 
 #### 可用模型列表：
