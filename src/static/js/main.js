@@ -654,11 +654,11 @@ function releaseWakeLock() {
 }
 
 // Use Back Camera Button
-const useBackCameraButton = document.getElementById('use-back-camera-button');
-useBackCameraButton.addEventListener('click', async () => {
+const changeCameraButton = document.getElementById('use-back-camera-button');
+changeCameraButton.addEventListener('click', async () => {
     try {
         if (videoManager) {
-            useBackCameraButton.classList.toggle('active');
+            changeCameraButton.classList.toggle('active');
             videoManager.facingMode = videoManager.facingMode === 'user' ? 'environment' : 'user';
             await videoManager.start(videoManager.fps, videoManager.onFrame);
             logMessage(`Switched to ${videoManager.facingMode === 'user' ? 'front' : 'back'} camera`, 'system');
@@ -666,7 +666,7 @@ useBackCameraButton.addEventListener('click', async () => {
             logMessage('Video manager not initialized', 'system');
         }
     } catch (error) {
-        useBackCameraButton.classList.remove('active');
+        changeCameraButton.classList.remove('active');
         logMessage(`Failed to switch camera: ${error.message}`, 'system');
     }
 });
