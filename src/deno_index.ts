@@ -15,15 +15,15 @@ const getContentType = (path: string): string => {
 
 async function handleWebSocket(req: Request): Promise<Response> {
   const { socket: clientWs, response } = Deno.upgradeWebSocket(req);
-  
+
   const url = new URL(req.url);
   const targetUrl = `wss://generativelanguage.googleapis.com${url.pathname}${url.search}`;
-  
+
   console.log('Target URL:', targetUrl);
-  
+
   const pendingMessages: string[] = [];
   const targetWs = new WebSocket(targetUrl);
-  
+
   targetWs.onopen = () => {
     console.log('Connected to Gemini');
     pendingMessages.forEach(msg => targetWs.send(msg));
@@ -118,7 +118,7 @@ async function handleRequest(req: Request): Promise<Response> {
     });
   } catch (e) {
     console.error('Error details:', e);
-    return new Response('Not Found', { 
+    return new Response('Not Found', {
       status: 404,
       headers: {
         'content-type': 'text/plain;charset=UTF-8',
@@ -127,4 +127,4 @@ async function handleRequest(req: Request): Promise<Response> {
   }
 }
 
-Deno.serve(handleRequest); 
+Deno.serve(handleRequest);
