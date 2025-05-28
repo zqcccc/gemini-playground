@@ -140,12 +140,12 @@ function updateMicIcon() {
 function updateAudioVisualizer(volume, isInput = false) {
     const visualizer = isInput ? inputAudioVisualizer : audioVisualizer;
     const audioBar = visualizer.querySelector('.audio-bar') || document.createElement('div');
-    
+
     if (!visualizer.contains(audioBar)) {
         audioBar.classList.add('audio-bar');
         visualizer.appendChild(audioBar);
     }
-    
+
     audioBar.style.width = `${volume * 100}%`;
     if (volume > 0) {
         audioBar.classList.add('active');
@@ -180,16 +180,16 @@ async function handleMicToggle() {
         try {
             await ensureAudioInitialized();
             audioRecorder = new AudioRecorder();
-            
+
             // Initialize gain node before starting recording
             if (audioRecorder.gainNode) {
                 audioRecorder.gainNode.gain.value = inputVolumeSlider.value;
             }
-            
+
             const inputAnalyser = audioCtx.createAnalyser();
             inputAnalyser.fftSize = 256;
             const inputDataArray = new Uint8Array(inputAnalyser.frequencyBinCount);
-            
+
             await audioRecorder.start((base64Data) => {
                 if (isUsingTool) {
                     client.sendRealtimeInput([{
@@ -203,7 +203,7 @@ async function handleMicToggle() {
                         data: base64Data
                     }]);
                 }
-                
+
                 inputAnalyser.getByteFrequencyData(inputDataArray);
                 const inputVolume = Math.max(...inputDataArray) / 255;
                 updateAudioVisualizer(inputVolume, true);
@@ -212,7 +212,7 @@ async function handleMicToggle() {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const source = audioCtx.createMediaStreamSource(stream);
             source.connect(inputAnalyser);
-            
+
             await audioStreamer.resume();
             isRecording = true;
             Logger.info('Microphone started');
@@ -263,11 +263,11 @@ async function connectToWebsocket() {
     const config = {
         model: CONFIG.API.MODEL_NAME,
         generationConfig: {
-            responseModalities: responseTypeSelect.value,
+            responseModalities: [responseTypeSelect.value],
             speechConfig: {
-                voiceConfig: { 
-                    prebuiltVoiceConfig: { 
-                        voiceName: voiceSelect.value
+                voiceConfig: {
+                    prebuiltVoiceConfig: {
+                        voiceName: voiceSelect.value    // You can change voice in the config.js file
                     }
                 }
             },
@@ -277,7 +277,7 @@ async function connectToWebsocket() {
                 text: systemInstructionInput.value
             }],
         }
-    };  
+    };
 
     try {
         await client.connect(config, apiKeyInput.value);
@@ -329,11 +329,11 @@ function disconnectFromWebsocket() {
     cameraButton.disabled = true;
     screenButton.disabled = true;
     logMessage('Disconnected from server', 'system');
-    
+
     if (videoManager) {
         stopVideo();
     }
-    
+
     if (screenRecorder) {
         stopScreenSharing();
     }
@@ -374,6 +374,8 @@ client.on('log', (log) => {
 
 client.on('close', (event) => {
     logMessage(`WebSocket connection closed (code ${event.code})`, 'system');
+	connectButton.textContent = 'Connect';
+	connectButton.classList.remove('connected');
 });
 
 client.on('audio', async (data) => {
@@ -463,7 +465,7 @@ connectButton.textContent = 'Connect';
  */
 async function handleVideoToggle() {
     Logger.info('Video toggle clicked, current state:', { isVideoActive, isConnected });
-    
+
     localStorage.setItem('video_fps', fpsInput.value);
 
     if (!isVideoActive) {
@@ -472,7 +474,7 @@ async function handleVideoToggle() {
             if (!videoManager) {
                 videoManager = new VideoManager();
             }
-            
+
             await videoManager.start(fpsInput.value,(frameData) => {
                 if (isConnected) {
                     client.sendRealtimeInput([frameData]);
@@ -526,7 +528,7 @@ async function handleScreenShare() {
     if (!isScreenSharing) {
         try {
             screenContainer.style.display = 'block';
-            
+
             screenRecorder = new ScreenRecorder();
             await screenRecorder.start(screenPreview, (frameData) => {
                 if (isConnected) {
@@ -578,12 +580,12 @@ screenButton.disabled = true;
 document.addEventListener('DOMContentLoaded', async () => {
     // 设置音量滑块默认值为50%
     inputVolumeSlider.value = 0.5;
-    
+
     const savedApiKey = localStorage.getItem('gemini_api_key');
     if (savedApiKey) {
         apiKeyInput.value = savedApiKey;
     }
-    
+
     // 自动连接
     if (savedApiKey) {  // 确保有 API Key 才尝试连接
         try {
@@ -606,7 +608,7 @@ applyConfigButton.addEventListener('click', () => {
 client.on('error', async (error) => {
     Logger.error('WebSocket error:', error);
     logMessage(`WebSocket error: ${error.message}`, 'system');
-    
+
     // 自动重新连接
     if (!isConnected) {
         try {
