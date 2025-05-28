@@ -28,7 +28,7 @@ export class VideoManager {
         this.previewVideo = document.getElementById('preview');
         this.stopVideoButton = document.getElementById('stop-video');
         this.framePreview = document.createElement('canvas');
-        
+
         // State management
         this.lastFrameData = null;
         this.lastSignificantFrame = null;
@@ -45,10 +45,10 @@ export class VideoManager {
         this.setupFramePreview();
 
         // 摄像头状态，用户切换镜头
-        this.facingMode = 'user';
+        this.facingMode = 'environment';
         this.onFrame = null;
         this.fps = null;
-        
+
         // 获取翻转按钮元素并添加事件监听
         this.flipCameraButton = document.getElementById('flip-camera');
         if (!this.flipCameraButton) {
@@ -57,7 +57,7 @@ export class VideoManager {
                 ErrorCodes.INVALID_STATE
             );
         }
-        
+
         // 在构造函数中直接绑定事件
         this.flipCameraButton.addEventListener('click', async () => {
             try {
@@ -134,7 +134,7 @@ export class VideoManager {
             this.videoContainer.style.display = 'block';
             console.log("fps:",fps);
             this.videoRecorder = new VideoRecorder({fps: fps});
-                        
+
             await this.videoRecorder.start(this.previewVideo,this.facingMode, (base64Data) => {
                 if (!this.isActive) {
                     //Logger.debug('Skipping frame - inactive');
@@ -178,7 +178,7 @@ export class VideoManager {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            
+
             if (this.lastFrameData) {
                 const motionScore = this.detectMotion(this.lastFrameData, imageData.data);
                 if (motionScore < this.MOTION_THRESHOLD && this.frameCount % this.FORCE_FRAME_INTERVAL !== 0) {
@@ -191,7 +191,7 @@ export class VideoManager {
             this.framePreviewHeight = Math.round(canvas.height * 0.5);
 
             this.updateFramePreview(base64Data,this.framePreviewWidth,this.framePreviewHeight);
-            
+
             this.lastFrameData = imageData.data;
             this.lastSignificantFrame = base64Data;
             this.lastFrameTime = Date.now();
@@ -228,7 +228,7 @@ export class VideoManager {
 
         try {
             Logger.info('Flipping camera');
-            this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';         
+            this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
             this.stop();
             await this.start(this.fps,this.onFrame);
             Logger.info('Camera flipped successfully');
